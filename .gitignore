@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 .DS_Store
 _dev-info
+mysql
+.editorconfig

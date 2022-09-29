@@ -1,14 +1,14 @@
 version: "3.9"
 
 networks:
-  laravel:
+  laravel_todo:
 
 services:
   nginx:
     image: nginx:stable-alpine
     container_name: nginx_server
     ports:
-      - "$NGINX_REMOTE_PORT_HTTP:$NGINX_LOCAL_PORT_HTTP" # Local/Remote, From host/Inside container
+      - "$DEFAULT_NGINX_REMOTE_PORT_HTTP:$DEFAULT_NGINX_LOCAL_PORT_HTTP" # Local/Remote, From host/Inside container
       # - "443:443"
     volumes:
       - $DEFAULT_VOLUME_REMOTE:$DEFAULT_VOLUME_LOCAL
@@ -17,7 +17,7 @@ services:
       - php
       - mysql
     networks:
-      - laravel
+      - laravel_todo
 
   mysql:
     image: mysql:5.7.22
@@ -26,8 +26,8 @@ services:
     tty: true
     ports:
       - "$MYSQL_REMOTE_PORT:$MYSQL_LOCAL_PORT"
-    volumes:
-      - $DEFAULT_VOLUME_REMOTE:$DEFAULT_VOLUME_LOCAL
+    # volumes:
+    #   - ./mysql:/var/lib/mysql
     environment:
       MYSQL_DATABASE: $DB_DATABASE
       MYSQL_USER: $DB_USERNAME
@@ -36,7 +36,7 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      - laravel
+      - laravel_todo
 
   php:
     build:
@@ -48,7 +48,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - laravel
+      - laravel_todo
 
   composer:
     image: composer:latest
@@ -57,7 +57,7 @@ services:
       - $DEFAULT_VOLUME_REMOTE:$DEFAULT_VOLUME_LOCAL
     working_dir: $DEFAULT_VOLUME_LOCAL
     networks:
-      - laravel
+      - laravel_todo
 
   npm:
     image: node:16
@@ -65,9 +65,9 @@ services:
     volumes:
       - $DEFAULT_VOLUME_REMOTE:$DEFAULT_VOLUME_LOCAL
     working_dir: $DEFAULT_VOLUME_LOCAL
-    entrypoint: ['npm']
+    entrypoint: ["npm"]
     networks:
-      - laravel
+      - laravel_todo
 
   artisan:
     build:
@@ -79,6 +79,6 @@ services:
     depends_on:
       - mysql
     working_dir: $DEFAULT_VOLUME_LOCAL
-    entrypoint: ['$DEFAULT_VOLUME_LOCAL/artisan']
+    entrypoint: ["$DEFAULT_VOLUME_LOCAL/artisan"]
     networks:
-      - laravel
+      - laravel_todo
