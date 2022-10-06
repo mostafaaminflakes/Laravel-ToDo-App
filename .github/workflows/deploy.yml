@@ -25,7 +25,7 @@ jobs:
     needs: prepare
     steps:
     - name: Clone repo
-      run: git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git
+      run: git clone git@github.com:mostafaaminflakes/Laravel-ToDo-App.git
     - name: Prepare .env file
       run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
