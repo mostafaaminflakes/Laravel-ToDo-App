@@ -17,5 +17,5 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
           script: |
-            cd /var/www/docker2.mostafahub.com
             whoami
+            ls -al
