@@ -18,17 +18,13 @@ jobs:
 
           script: |
             cd /var/www/docker2.mostafahub.com
-            pwd
             rm -rf /var/www/docker2.mostafahub.com/{*,.*}
-
             git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/docker2.mostafahub.com
+            php -r "file_exists('.env') || copy('.env.example', '.env');"
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
     steps:
-    - name: Prepare .env file
-      run: |
-          php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Composer install
       run: composer install --no-interaction --prefer-dist --optimize-autoloader
     - run: yes | php artisan migrate:install
