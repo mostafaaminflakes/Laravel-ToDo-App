@@ -21,7 +21,8 @@ jobs:
             rm -rf *
             git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git .
     - name: Prepare .env file
-      run: cp .env.example .env
+      run: |
+          php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Generate Laravel key
       run: php artisan key:generate
     - name: Create database if not exists
