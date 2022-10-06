@@ -23,7 +23,7 @@ jobs:
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan key:generate
-            mysql -u${secrets.DB_USERNAME} -h127.0.0.1 -p${secrets.DB_PASSWORD} -e 'CREATE DATABASE IF NOT EXISTS ${secrets.DB_NAME};'
+            mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
             php artisan migrate:install
   deploy:
     runs-on: ubuntu-latest
