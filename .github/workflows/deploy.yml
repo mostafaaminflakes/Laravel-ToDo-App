@@ -17,8 +17,22 @@ jobs:
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
 
           script: |
-            whoami
             cd /var/www/docker2.mostafahub.com
-            git pull origin main
-            composer install
-            ls -al
+            rm -rf *
+            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git
+    - name: Prepare .env file
+      run: cp .env.example .env
+    - name: Generate Laravel key
+      run: php artisan key:generate
+    - name: Create database if not exists
+      run: mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
+    - name: Run migrations
+      env:
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_DATABASE: ${{secrets.DB_NAME}}
+        DB_USERNAME: ${{secrets.DB_USERNAME}}
+        DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      run: yes | php artisan migrate:fresh --force
+    - name: Composer install
+      run: composer install --no-interaction --prefer-dist --optimize-autoloader
