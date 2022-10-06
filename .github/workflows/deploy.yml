@@ -24,8 +24,7 @@ jobs:
     - name: Prepare .env file
       run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
-    - name: Create database if not exists
-      run: mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
+    - run: yes | php artisan migrate:install
     - name: Run migrations
       env:
         DB_CONNECTION: mysql
