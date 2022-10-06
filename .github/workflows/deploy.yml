@@ -8,7 +8,7 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
-    - name: SSH Remote Connect
+    - name: SSH Remote Connect1
       uses: appleboy/ssh-action@v0.1.5
       with:
           host: ${{secrets.SSH_HOST}}
