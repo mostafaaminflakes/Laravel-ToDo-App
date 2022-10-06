@@ -19,7 +19,8 @@ jobs:
           script: |
             cd /var/www/docker2.mostafahub.com
             rm -rf *
-            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git .
+    - name: Clone repo
+      run: git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git .
     - name: Prepare .env file
       run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
