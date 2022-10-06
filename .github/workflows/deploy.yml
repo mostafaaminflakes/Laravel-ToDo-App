@@ -21,13 +21,14 @@ jobs:
             rm -rf /var/www/docker2.mostafahub.com/{*,.*}
             git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/docker2.mostafahub.com
             php -r "file_exists('.env') || copy('.env.example', '.env');"
+            composer install --no-interaction --prefer-dist --optimize-autoloader
+            php artisan key:generate
+            php artisan migrate:install
+            php artisan migrate:fresh --force
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
     steps:
-    - name: Composer install
-      run: composer install --no-interaction --prefer-dist --optimize-autoloader
-    - run: yes | php artisan migrate:install
     - name: Run migrations
       env:
         DB_CONNECTION: mysql
@@ -35,6 +36,3 @@ jobs:
         DB_DATABASE: ${{secrets.DB_NAME}}
         DB_USERNAME: ${{secrets.DB_USERNAME}}
         DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-      run: yes | php artisan migrate:fresh --force
-    - name: Generate Laravel key
-      run: php artisan key:generate
