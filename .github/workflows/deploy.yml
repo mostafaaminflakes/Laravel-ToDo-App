@@ -25,9 +25,7 @@ jobs:
     needs: prepare
     steps:
     - name: Clone repo
-      run: gh repo clone mostafaaminflakes/Laravel-ToDo-App
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git
     - name: Prepare .env file
       run: |
           php -r "file_exists('.env') || copy('.env.example', '.env');"
