@@ -18,7 +18,7 @@ jobs:
 
           script: |
             cd /var/www/docker2.mostafahub.com
-            rm -rf *
+            
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
