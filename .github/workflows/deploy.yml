@@ -25,7 +25,6 @@ jobs:
     needs: prepare
     steps:
     - name: Clone repo
-      working-directory: /var/www/docker2.mostafahub.com
       run: gh repo clone mostafaaminflakes/Laravel-ToDo-App
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
