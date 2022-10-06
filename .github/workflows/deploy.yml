@@ -20,7 +20,7 @@ jobs:
             cd /var/www/docker2.mostafahub.com
             pwd
             rm -rf /var/www/docker2.mostafahub.com/*
-            git clone --bare https://github.com/mostafaaminflakes/Laravel-ToDo-App.git
+            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/docker2.mostafahub.com
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
