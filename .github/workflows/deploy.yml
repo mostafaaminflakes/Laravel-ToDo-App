@@ -19,7 +19,7 @@ jobs:
           script: |
             cd /var/www/docker2.mostafahub.com
             rm -rf *
-            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git
+            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git .
     - name: Prepare .env file
       run: cp .env.example .env
     - name: Generate Laravel key
