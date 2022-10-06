@@ -18,5 +18,7 @@ jobs:
 
           script: |
             whoami
-            cd /var/www/
+            cd /var/www/docker2.mostafahub.com
+            git pull origin main
+            composer install
             ls -al
