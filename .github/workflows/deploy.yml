@@ -24,7 +24,6 @@ jobs:
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan key:generate
             php artisan migrate:install
-            php artisan migrate:fresh --force
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
@@ -36,3 +35,4 @@ jobs:
         DB_DATABASE: ${{secrets.DB_NAME}}
         DB_USERNAME: ${{secrets.DB_USERNAME}}
         DB_PASSWORD: ${{secrets.DB_PASSWORD}}
+      run: yes | php artisan migrate:fresh --force
