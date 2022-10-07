@@ -8,7 +8,7 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     steps:
-    - name: SSH Remote Connect1
+    - name: SSH Remote Connect and configurations
       uses: appleboy/ssh-action@v0.1.5
       with:
           host: ${{secrets.SSH_HOST}}
@@ -24,7 +24,7 @@ jobs:
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan key:generate
             mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
-            php artisan migrate:install
+            php artisan migrate
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
