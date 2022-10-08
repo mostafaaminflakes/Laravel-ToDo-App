@@ -27,6 +27,7 @@ jobs:
     - name: Laravel migrate
       run: |
         cd /var/www/docker2.mostafahub.com
+        pwd
         php artisan migrate --force
   deploy:
     runs-on: ubuntu-latest
