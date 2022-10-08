@@ -30,4 +30,4 @@ jobs:
     needs: prepare
     steps:
     - name: Laravel migrate
-      run: yes | php artisan migrate --force
+      run: php artisan migrate --force
