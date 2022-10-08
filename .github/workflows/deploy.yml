@@ -25,7 +25,8 @@ jobs:
             php artisan key:generate
             mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
     - name: Laravel migrate
-      run: php artisan migrate --force
+      run: |
+        php artisan migrate --force
   deploy:
     runs-on: ubuntu-latest
     needs: prepare
