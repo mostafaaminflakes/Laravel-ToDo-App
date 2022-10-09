@@ -10,7 +10,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: SSH Remote Connect and configurations
+    - name: SSH Remote Connect and Configurations
       uses: appleboy/ssh-action@v0.1.5
       with:
           host: ${{secrets.SSH_HOST}}
