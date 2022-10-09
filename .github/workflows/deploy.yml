@@ -17,7 +17,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{secrets.SSH_KEY}}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          script: |
+          script: |        
+            mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
             cd /var/www/docker2.mostafahub.com
             rm -rf /var/www/docker2.mostafahub.com/{*,.*}
             git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/docker2.mostafahub.com
@@ -34,5 +35,4 @@ jobs:
         echo ${{secrets.DB_USERNAME}}
         echo ${{secrets.DB_PASSWORD}}
         echo ${{secrets.DB_NAME}}
-        mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
         php artisan migrate:fresh --force
