@@ -24,5 +24,8 @@ jobs:
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             composer install --no-interaction --prefer-dist --optimize-autoloader
             php artisan key:generate
+            chmod -R 777 storage bootstrap/cache
             mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
             php artisan migrate:fresh --force
+    - name: LS -LA
+      run: ls -la
