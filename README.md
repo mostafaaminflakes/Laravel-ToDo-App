@@ -1,8 +1,8 @@
 # Laravel-todo-app
 
 -   This is the basic to-do app with sanctum authentication inherited as a part of a testing process for **Docker** and **Docker Compose**.
--   The repo uses **GitHub actions** to sync the app with a **DigitalOcean droplet**.
--   The droplet has **Ububtu** linux with Docker installed and configured.
+-   The repo uses **GitHub actions** [deploy.yml](./.github/workflows/deploy.yml) to sync the app with a **DigitalOcean droplet**.
+-   The droplet has **Ububtu** linux with Docker, MySQL, and PHP installed and configured.
 
 ### Note:
 
