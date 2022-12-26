@@ -21,11 +21,11 @@ jobs:
             # OPTIONAL: Create BD if it doesn't exist.
             mysql -u${{secrets.DB_USERNAME}} -h127.0.0.1 -p${{secrets.DB_PASSWORD}} -e 'CREATE DATABASE IF NOT EXISTS ${{secrets.DB_NAME}};'
             # cd into the correct website directory.
-            cd /var/www/docker2.mostafahub.com
+            cd /var/www/laratodo.mostafahub.com
             # OPTIONAL: Remove all old files.
-            rm -rf /var/www/docker2.mostafahub.com/{*,.*}
+            rm -rf /var/www/laratodo.mostafahub.com/{*,.*}
             # Clone repo from GitHub.
-            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/docker2.mostafahub.com
+            git clone https://github.com/mostafaaminflakes/Laravel-ToDo-App.git /var/www/laratodo.mostafahub.com
             # Create ENV file.
             php -r "file_exists('.env') || copy('.env.example', '.env');"
             # Install dependencies.
